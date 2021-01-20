@@ -163,3 +163,32 @@ class Accessories(models.Model):
     class Meta:
         verbose_name = 'Аксессуар'
         verbose_name_plural = 'Аксессуары'
+
+
+class Cart(models.Model):
+    vendor_code = models.IntegerField(verbose_name='Артикуль', default=0)
+    name = models.CharField(max_length=50, verbose_name='Название')
+    size = models.CharField(max_length=10, verbose_name='Размер', blank=True, null=True)
+    quantity = models.SmallIntegerField(default=0, verbose_name='Количество')
+    price = models.SmallIntegerField(verbose_name='Цена')
+    order = models.ForeignKey('Orders', verbose_name='Заказ', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    def get_amount(self):
+        return self.quantity * self.price
+
+    class Meta:
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'Корзина'
+
+
+class Orders(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, verbose_name='Клиент')
+    phone = models.CharField(max_length=20, verbose_name='Номер телефона')
+    date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return 'Заказ № ' + str(self.id)
