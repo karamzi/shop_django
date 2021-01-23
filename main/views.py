@@ -1,12 +1,14 @@
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from .serializers import BallsSerializers, BagsSerializers, ShoesSerializers, AccessoriesSerializers
 
-from .models import Balls, Bags, Shoes, Accessories
+from .models import Balls, Bags, Shoes, Accessories, Orders, Cart
 
 
 class BallsViews(APIView):
@@ -85,3 +87,22 @@ class AccessoryView(APIView):
             return Response(serializer.data)
         except ObjectDoesNotExist:
             return HttpResponse(status=404)
+
+
+@csrf_exempt
+def create_order(request):
+    if request.method == 'POST':
+        cart = json.loads(request.POST['cart'])
+        order = Orders.objects.create(name=request.POST['name'], phone=request.POST['phone'],
+                                      email=request.POST['email'], total_price=request.POST['totalPrice'])
+        for item in cart:
+            product = Cart()
+            product.vendor_code = item['vendor_code']
+            product.name = item['name']
+            product.size = item['size']
+            product.quantity = item['quantity']
+            product.price = item['price']
+            product.order = order
+            product.save()
+
+        return HttpResponse(status=200)

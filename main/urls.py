@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import BallsViews, BallView, BagsView, BagView, ShoesView, CurrentShoesView, AccessoriesView, AccessoryView
+from .views import BallsViews, BallView, BagsView, BagView, ShoesView, CurrentShoesView, AccessoriesView, AccessoryView, \
+    create_order
 
 urlpatterns = [
     path('api/1.0/balls/', BallsViews.as_view()),
@@ -10,4 +11,5 @@ urlpatterns = [
     path('api/1.0/shoes/<int:vendor_code>/', CurrentShoesView.as_view()),
     path('api/1.0/accessories/', AccessoriesView.as_view()),
     path('api/1.0/accessory/<int:vendor_code>/', AccessoryView.as_view()),
+    path('api/1.0/createOrder/', create_order)
 ]
