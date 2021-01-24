@@ -54,14 +54,22 @@ class Balls(models.Model):
     availability = models.BooleanField(verbose_name='Наличие', default=False)
     weight = models.ManyToManyField(BallWeight)
     img = models.ImageField(verbose_name='Изображение', upload_to=get_img_path)
-    subcategory = (
+    company = (
         ('Storm', 'Storm'),
         ('Hammer', 'Hammer'),
         ('Motive', 'Motive'),
         ('Track', 'Track'),
     )
-    subcategory = models.CharField(max_length=20, choices=subcategory)
-
+    company = models.CharField(max_length=20, choices=company, verbose_name='Компания')
+    oil = (
+        ('Тяжелое масло', 'Тяжелое масло'),
+        ('Средне тяжелое масло', 'Средне тяжелое масло'),
+        ('Среднее масло', 'Среднее масло'),
+        ('Средне легкое масло', 'Средне легкое масло'),
+        ('Легкое масло', 'Легкое масло'),
+        ('Добивочный', 'Добивочный'),
+    )
+    oil = models.CharField(max_length=20, choices=oil, verbose_name='Масло')
     @staticmethod
     def __name__():
         return 'Balls'
@@ -87,6 +95,19 @@ class Bags(models.Model):
     price = models.SmallIntegerField(verbose_name='Цена')
     availability = models.BooleanField(verbose_name='Наличие', default=False)
     img = models.ImageField(verbose_name='Изображение', upload_to=get_img_path)
+    company = (
+        ('Storm', 'Storm'),
+        ('Hammer', 'Hammer'),
+        ('Motive', 'Motive'),
+        ('Track', 'Track'),
+    )
+    company = models.CharField(max_length=20, choices=company, verbose_name='Компания')
+    ball_quantity = (
+        ('3 шара', '3 шара'),
+        ('2 шара', '2 шара'),
+        ('1 шар', '1 шар'),
+    )
+    ball_quantity = models.CharField(max_length=10, choices=ball_quantity, verbose_name='Количество шаров')
 
     @staticmethod
     def __name__():
@@ -121,6 +142,13 @@ class Shoes(models.Model):
     availability = models.BooleanField(verbose_name='Наличие', default=False)
     size = models.ManyToManyField(ShoesSize, verbose_name='Размер обуви')
     img = models.ImageField(verbose_name='Изображение', upload_to=get_img_path)
+    company = (
+        ('Storm', 'Storm'),
+        ('Hammer', 'Hammer'),
+        ('Motive', 'Motive'),
+        ('Track', 'Track'),
+    )
+    company = models.CharField(max_length=20, choices=company, verbose_name='Компания')
 
     @staticmethod
     def __name__():
@@ -147,6 +175,12 @@ class Accessories(models.Model):
     price = models.SmallIntegerField(verbose_name='Цена')
     availability = models.BooleanField(verbose_name='Наличие', default=False)
     img = models.ImageField(verbose_name='Изображение', upload_to=get_img_path)
+    type = (
+        ('Полотенце', 'Полотенце'),
+        ('Клинеры', 'Клинеры'),
+        ('Подошвы', 'Подошвы'),
+    )
+    type = models.CharField(max_length=10, choices=type, verbose_name='Тип продукции')
 
     @staticmethod
     def __name__():
@@ -175,9 +209,6 @@ class Cart(models.Model):
 
     def __str__(self):
         return self.name
-
-    def get_amount(self):
-        return self.quantity * self.price
 
     class Meta:
         verbose_name = 'Корзина'

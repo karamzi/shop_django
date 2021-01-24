@@ -15,8 +15,6 @@ class BallsViews(APIView):
 
     def get(self, request):
         balls = Balls.objects.all()
-        if 'subcategory' in request.GET:
-            balls = balls.filter(subcategory=request.GET['subcategory'])
         serializers = BallsSerializers(balls, many=True)
         return Response(serializers.data)
 
