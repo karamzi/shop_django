@@ -44,6 +44,10 @@ class BallWeight(models.Model):
     def __str__(self):
         return str(self.weight)
 
+    class Meta:
+        verbose_name = 'Вес шара'
+        verbose_name_plural = 'Веса шаров'
+
 
 class Balls(models.Model):
     vendor_code = models.IntegerField(verbose_name='Артикуль', default=0)
@@ -131,6 +135,10 @@ class ShoesSize(models.Model):
 
     def __str__(self):
         return str(self.size)
+
+    class Meta:
+        verbose_name = 'Размер обуви'
+        verbose_name_plural = 'Размеры обуви'
 
 
 class Shoes(models.Model):
@@ -221,7 +229,7 @@ class Orders(models.Model):
     phone = models.CharField(max_length=20, verbose_name='Номер телефона')
     email = models.CharField(max_length=50, verbose_name='email', blank=True, null=True)
     total_price = models.SmallIntegerField(verbose_name='Итого', default=0)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(auto_now_add=True, verbose_name='Дата')
 
     def __str__(self):
         return 'Заказ № ' + str(self.id)
