@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Balls, Bags, Shoes, Img, Accessories, BallWeight, ShoesSize
+from .models import Balls, Bags, Shoes, Img, Accessories, BallWeight, ShoesSize, PopularProduct
 
 
 class ImgSerializers(serializers.ModelSerializer):
@@ -71,3 +71,22 @@ class AccessoriesSerializers(serializers.ModelSerializer):
     class Meta:
         model = Accessories
         exclude = ('id',)
+
+
+class PopularProductSerializer(serializers.ModelSerializer):
+    product = serializers.SerializerMethodField()
+
+    def get_product(self, obj):
+        if obj.ball:
+            return BallsSerializers(obj.ball).data
+        if obj.shoes:
+            return ShoesSerializers(obj.shoes).data
+        if obj.accessory:
+            return AccessoriesSerializers(obj.accessory).data
+        if obj.bag:
+            return BagsSerializers(obj.bag).data
+        return None
+
+    class Meta:
+        model = PopularProduct
+        fields = ('product',)

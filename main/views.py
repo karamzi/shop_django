@@ -6,9 +6,10 @@ import json
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .serializers import BallsSerializers, BagsSerializers, ShoesSerializers, AccessoriesSerializers
+from .serializers import BallsSerializers, BagsSerializers, ShoesSerializers, AccessoriesSerializers, \
+    PopularProductSerializer
 
-from .models import Balls, Bags, Shoes, Accessories, Orders, Cart
+from .models import Balls, Bags, Shoes, Accessories, Orders, Cart, PopularProduct
 
 
 class BallsViews(APIView):
@@ -104,3 +105,11 @@ def create_order(request):
             product.save()
 
         return HttpResponse(status=200)
+
+
+class PopularProductView(APIView):
+
+    def get(self, request):
+        popular_products = PopularProduct.objects.all()[:4]
+        serializer = PopularProductSerializer(popular_products, many=True)
+        return Response(serializer.data)

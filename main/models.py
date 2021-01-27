@@ -238,3 +238,25 @@ class Orders(models.Model):
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
         ordering = ['-date']
+
+
+class PopularProduct(models.Model):
+    ball = models.OneToOneField(Balls, on_delete=models.CASCADE, null=True, blank=True)
+    shoes = models.OneToOneField(Shoes, on_delete=models.CASCADE, null=True, blank=True)
+    accessory = models.OneToOneField(Accessories, on_delete=models.CASCADE, null=True, blank=True)
+    bag = models.OneToOneField(Bags, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        if self.ball:
+            return self.ball.name
+        if self.shoes:
+            return self.shoes.name
+        if self.accessory:
+            return self.accessory.name
+        if self.bag:
+            return self.bag.name
+
+    class Meta:
+        verbose_name = 'Товар'
+        verbose_name_plural = 'Популярные товары'
+        ordering = ['-pk']

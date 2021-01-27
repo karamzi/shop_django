@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import Balls, Bags, Shoes, ShoesSize, Accessories, BallWeight, Cart, Orders
+from main.models import Balls, Bags, Shoes, ShoesSize, Accessories, BallWeight, Cart, Orders, PopularProduct
 
 
 class BasicAdmin(admin.ModelAdmin):
@@ -36,3 +36,4 @@ admin.site.register(Shoes, BasicAdmin)
 admin.site.register(Accessories, AccessoriesAdmin)
 # admin.site.register(BallWeight)
 admin.site.register(Orders, OrdersAdmin)
+admin.site.register(PopularProduct)
