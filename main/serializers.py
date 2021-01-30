@@ -19,11 +19,7 @@ class WeightSerializers(serializers.ModelSerializer):
 
 class BallsSerializers(serializers.ModelSerializer):
     addition_img = ImgSerializers(many=True)
-    img = serializers.SerializerMethodField()
     weight = WeightSerializers(many=True)
-
-    def get_img(self, obj):
-        return 'http://127.0.0.1:8000' + obj.img.url
 
     class Meta:
         model = Balls
@@ -32,10 +28,6 @@ class BallsSerializers(serializers.ModelSerializer):
 
 class BagsSerializers(serializers.ModelSerializer):
     addition_img = ImgSerializers(many=True)
-    img = serializers.SerializerMethodField()
-
-    def get_img(self, obj):
-        return 'http://127.0.0.1:8000' + obj.img.url
 
     class Meta:
         model = Bags
@@ -50,11 +42,7 @@ class SizeSerializers(serializers.ModelSerializer):
 
 class ShoesSerializers(serializers.ModelSerializer):
     addition_img = ImgSerializers(many=True)
-    img = serializers.SerializerMethodField()
     size = SizeSerializers(many=True)
-
-    def get_img(self, obj):
-        return 'http://127.0.0.1:8000' + obj.img.url
 
     class Meta:
         model = Shoes
@@ -63,10 +51,6 @@ class ShoesSerializers(serializers.ModelSerializer):
 
 class AccessoriesSerializers(serializers.ModelSerializer):
     addition_img = ImgSerializers(many=True)
-    img = serializers.SerializerMethodField()
-
-    def get_img(self, obj):
-        return 'http://127.0.0.1:8000' + obj.img.url
 
     class Meta:
         model = Accessories
