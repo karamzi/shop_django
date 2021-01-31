@@ -188,7 +188,7 @@ class Accessories(models.Model):
         ('Клинеры', 'Клинеры'),
         ('Подошвы', 'Подошвы'),
     )
-    type = models.CharField(max_length=10, choices=type, verbose_name='Тип продукции')
+    type = models.CharField(max_length=30, choices=type, verbose_name='Тип продукции')
 
     @staticmethod
     def __name__():
