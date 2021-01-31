@@ -177,7 +177,7 @@ class Shoes(models.Model):
 
 class Accessories(models.Model):
     vendor_code = models.IntegerField(verbose_name='Артикуль', default=0)
-    category = models.CharField(verbose_name='Категория', default='accessory', editable=False, max_length=5)
+    category = models.CharField(verbose_name='Категория', default='accessory', editable=False, max_length=10)
     name = models.CharField(max_length=50, verbose_name='Название')
     description = models.TextField(verbose_name='Описание товара')
     price = models.SmallIntegerField(verbose_name='Цена')
@@ -188,7 +188,7 @@ class Accessories(models.Model):
         ('Клинеры', 'Клинеры'),
         ('Подошвы', 'Подошвы'),
     )
-    type = models.CharField(max_length=255, choices=type, verbose_name='Тип продукции')
+    type = models.CharField(max_length=30, choices=type, verbose_name='Тип продукции')
 
     @staticmethod
     def __name__():
