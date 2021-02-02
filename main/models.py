@@ -63,6 +63,13 @@ class Balls(models.Model):
         ('Hammer', 'Hammer'),
         ('Motive', 'Motive'),
         ('Track', 'Track'),
+        ('DV8', 'DV8'),
+        ('Radical', 'Radical'),
+        ('Roto Grip', 'Roto Grip'),
+        ('Global', 'Global'),
+        ('Brunswick', 'Brunswick'),
+        ('Ebonite', 'Ebonite'),
+        ('Columbia', 'Columbia'),
     )
     company = models.CharField(max_length=20, choices=company, verbose_name='Компания')
     oil = (
@@ -74,6 +81,7 @@ class Balls(models.Model):
         ('Добивочный', 'Добивочный'),
     )
     oil = models.CharField(max_length=20, choices=oil, verbose_name='Масло')
+
     @staticmethod
     def __name__():
         return 'Balls'
@@ -104,9 +112,12 @@ class Bags(models.Model):
         ('Hammer', 'Hammer'),
         ('Motive', 'Motive'),
         ('Track', 'Track'),
+        ('Ebonite', 'Ebonite'),
+        ('Bowltec', 'Bowltec')
     )
     company = models.CharField(max_length=20, choices=company, verbose_name='Компания')
     ball_quantity = (
+        ('more', 'Больше трех шаров'),
         ('3 шара', '3 шара'),
         ('2 шара', '2 шара'),
         ('1 шар', '1 шар'),
@@ -155,8 +166,22 @@ class Shoes(models.Model):
         ('Hammer', 'Hammer'),
         ('Motive', 'Motive'),
         ('Track', 'Track'),
+        ('Dexter', 'Dexter'),
+        ('Etonic', 'Etonic'),
+        ('Banff', 'Banff'),
+        ('Brunswick', 'Brunswick'),
     )
     company = models.CharField(max_length=20, choices=company, verbose_name='Компания')
+    sex = (
+        ('Мужские', 'Мужские'),
+        ('Женские', 'Женские'),
+    )
+    sex = models.CharField(max_length=20, verbose_name='Пол', choices=sex)
+    hand = (
+        ('Левша', 'Левша'),
+        ('Правша', 'Правша')
+    )
+    hand = models.CharField(max_length=20, verbose_name='Правша/левша', choices=hand, blank=True, null=True)
 
     @staticmethod
     def __name__():
@@ -184,9 +209,9 @@ class Accessories(models.Model):
     availability = models.BooleanField(verbose_name='Наличие', default=False)
     img = models.ImageField(verbose_name='Изображение', upload_to=get_img_path)
     type = (
-        ('Полотенце', 'Полотенце'),
-        ('Клинеры', 'Клинеры'),
-        ('Подошвы', 'Подошвы'),
+        ('Для обуви', 'Для обуви'),
+        ('Для рук', 'Для рук'),
+        ('Для шара', 'Для шара'),
     )
     type = models.CharField(max_length=10, choices=type, verbose_name='Тип продукции')
 
