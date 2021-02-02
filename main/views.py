@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -105,6 +106,10 @@ def create_order(request):
             product.save()
 
         return HttpResponse(status=200)
+
+
+def index(request):
+    return render(request, 'index.html')
 
 
 class PopularProductView(APIView):

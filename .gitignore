@@ -9,3 +9,5 @@ media/*
 */.DS_Store
 venv/*
 static/video/
+shop/settings.py
+.idea
