@@ -59,7 +59,7 @@
             <h3>Популярные товары</h3>
             <div class="list_popular_items">
                 {% for product in popular_products %}
-                <div class="popular_item"><a href="/shoes/{{ product.product.vendor_code }}" class="">
+                <div class="popular_item"><a href="/{{ product.product.category }}/{{ product.product.vendor_code }}" class="">
                     <div class="popular_item_img"><img
                             src="{{ product.product.img }}" alt=""></div>
                     <div class="popular_item_title"><h4>{{ product.product.name }}</h4></div>
