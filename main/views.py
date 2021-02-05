@@ -109,7 +109,12 @@ def create_order(request):
 
 
 def index(request):
-    return render(request, 'index.html')
+    popular_products = PopularProduct.objects.all()[:4]
+    serializer = PopularProductSerializer(popular_products, many=True)
+    context = {
+        'popular_products': serializer.data
+    }
+    return render(request, 'index.html', context)
 
 
 class PopularProductView(APIView):

@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf.urls import url
 from . import views
 
 urlpatterns = [
@@ -12,5 +13,5 @@ urlpatterns = [
     path('api/1.0/accessory/<int:vendor_code>/', views.AccessoryView.as_view()),
     path('api/1.0/createOrder/', views.create_order),
     path('api/1.0/popularProduct/', views.PopularProductView.as_view()),
-    path('', views.index),
+    url(r'^', views.index),
 ]
