@@ -11,15 +11,9 @@ class ImgSerializers(serializers.ModelSerializer):
         fields = ('img',)
 
 
-class WeightSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = BallWeight
-        fields = ('weight',)
-
-
 class BallsSerializers(serializers.ModelSerializer):
     addition_img = ImgSerializers(many=True)
-    weight = WeightSerializers(many=True)
+    weight = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Balls
@@ -34,15 +28,9 @@ class BagsSerializers(serializers.ModelSerializer):
         exclude = ('id',)
 
 
-class SizeSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = ShoesSize
-        fields = ('size',)
-
-
 class ShoesSerializers(serializers.ModelSerializer):
     addition_img = ImgSerializers(many=True)
-    size = SizeSerializers(many=True)
+    size = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Shoes
