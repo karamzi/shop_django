@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import ListView, TemplateView, DetailView
 import json
 
 from rest_framework.views import APIView
@@ -13,7 +14,7 @@ from .serializers import BallsSerializers, BagsSerializers, ShoesSerializers, Ac
 from .models import Balls, Bags, Shoes, Accessories, Orders, Cart, PopularProduct
 
 
-class BallsViews(APIView):
+class BallsAPIViews(APIView):
 
     def get(self, request):
         balls = Balls.objects.all()
@@ -21,7 +22,7 @@ class BallsViews(APIView):
         return Response(serializers.data)
 
 
-class BallView(APIView):
+class BallAPIView(APIView):
 
     def get(self, request, vendor_code):
         try:
@@ -32,7 +33,7 @@ class BallView(APIView):
             return HttpResponse(status=404)
 
 
-class BagsView(APIView):
+class BagsAPIView(APIView):
 
     def get(self, request):
         bags = Bags.objects.all()
@@ -40,7 +41,7 @@ class BagsView(APIView):
         return Response(serializers.data)
 
 
-class BagView(APIView):
+class BagAPIView(APIView):
 
     def get(self, request, vendor_code):
         try:
@@ -51,7 +52,7 @@ class BagView(APIView):
             return HttpResponse(status=404)
 
 
-class ShoesView(APIView):
+class ShoesAPIView(APIView):
 
     def get(self, request):
         shoes = Shoes.objects.all()
@@ -59,7 +60,7 @@ class ShoesView(APIView):
         return Response(serializers.data)
 
 
-class CurrentShoesView(APIView):
+class CurrentShoesAPIView(APIView):
 
     def get(self, request, vendor_code):
         try:
@@ -70,7 +71,7 @@ class CurrentShoesView(APIView):
             return HttpResponse(status=404)
 
 
-class AccessoriesView(APIView):
+class AccessoriesAPIView(APIView):
 
     def get(self, request):
         accessory = Accessories.objects.all()
@@ -78,7 +79,7 @@ class AccessoriesView(APIView):
         return Response(serializers.data)
 
 
-class AccessoryView(APIView):
+class AccessoryAPIView(APIView):
 
     def get(self, request, vendor_code):
         try:
@@ -108,6 +109,14 @@ def create_order(request):
         return HttpResponse(status=200)
 
 
+class PopularProductAPIView(APIView):
+
+    def get(self, request):
+        popular_products = PopularProduct.objects.all()[:4]
+        serializer = PopularProductSerializer(popular_products, many=True)
+        return Response(serializer.data)
+
+
 def index(request):
     popular_products = PopularProduct.objects.all()[:4]
     serializer = PopularProductSerializer(popular_products, many=True)
@@ -117,9 +126,50 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-class PopularProductView(APIView):
+class BallsView(ListView):
+    template_name = 'balls.html'
+    model = Balls
 
-    def get(self, request):
-        popular_products = PopularProduct.objects.all()[:4]
-        serializer = PopularProductSerializer(popular_products, many=True)
-        return Response(serializer.data)
+
+class BallView(DetailView):
+    template_name = 'ball.html'
+    model = Balls
+    slug_field = 'vendor_code'
+
+
+class BagsView(ListView):
+    template_name = 'bags.html'
+    model = Bags
+
+
+class BagView(DetailView):
+    template_name = 'bag.html'
+    model = Bags
+    slug_field = 'vendor_code'
+
+
+class ShoesView(ListView):
+    template_name = 'shoes.html'
+    model = Shoes
+
+
+class CurrentShoesView(DetailView):
+    template_name = 'current_shoes.html'
+    model = Shoes
+    slug_field = 'vendor_code'
+
+
+class AccessoriesView(ListView):
+    template_name = 'accessories.html'
+    model = Accessories
+
+
+class AccessoryView(DetailView):
+    template_name = 'accessory.html'
+    model = Accessories
+    slug_field = 'vendor_code'
+
+
+class BowlingSchoolView(TemplateView):
+    template_name = 'bowling_school.html'
+

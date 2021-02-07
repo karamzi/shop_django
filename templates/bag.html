@@ -1,0 +1,28 @@
+{% extends 'basic.html' %}
+
+{% block app %}
+    <div id="app">
+        {% include 'header.html' %}
+        <section data-v-842fc7a6="" class="section_product">
+            <div data-v-842fc7a6="" class="container">
+                <div data-v-842fc7a6="" class="product_block">
+                    <div data-v-842fc7a6="" class="product_img"><img data-v-842fc7a6=""
+                                                                     src="https://bowling-petersburg.ru{{ object.img.url }}"
+                                                                     alt=""></div>
+                    <div data-v-842fc7a6="" class="product_details">
+                        <div data-v-842fc7a6="" class="product_title">{{ object.name }}</div>
+                        <div data-v-842fc7a6="" class="product_status">В наличии</div>
+                        <div data-v-842fc7a6="" class="product_price">{{ object.price }} руб</div>
+                        <div data-v-842fc7a6="" class="product_description">{{ object.description }}
+                        </div>
+                        <div data-v-842fc7a6="" class="product_buttons">
+                            <div data-v-842fc7a6="" class="product_add_to_cart"><p data-v-842fc7a6="">Добавить
+                                в корзину</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% include 'footer.html' %}
+    </div>
+{% endblock %}
