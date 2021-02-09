@@ -253,7 +253,7 @@ class Orders(models.Model):
     name = models.CharField(max_length=100, verbose_name='Клиент')
     phone = models.CharField(max_length=20, verbose_name='Номер телефона')
     email = models.CharField(max_length=50, verbose_name='email', blank=True, null=True)
-    total_price = models.SmallIntegerField(verbose_name='Итого', default=0)
+    total_price = models.IntegerField(verbose_name='Итого', default=0)
     date = models.DateField(auto_now_add=True, verbose_name='Дата')
 
     def __str__(self):
