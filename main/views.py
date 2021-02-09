@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, TemplateView, DetailView
+from django.core.mail import send_mail
 import json
 
 from rest_framework.views import APIView
@@ -105,7 +106,8 @@ def create_order(request):
             product.price = item['price']
             product.order = order
             product.save()
-
+        send_mail('Новый заказ', 'На сайте появился новый заказ', 'federation.bratsk@gmail.com', ['play-wow@yandex.ru'],
+                  fail_silently=False)
         return HttpResponse(status=200)
 
 
@@ -172,4 +174,3 @@ class AccessoryView(DetailView):
 
 class BowlingSchoolView(TemplateView):
     template_name = 'bowling_school.html'
-
