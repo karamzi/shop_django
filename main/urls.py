@@ -1,6 +1,7 @@
 from django.urls import path
 from django.conf.urls import url
 from . import views
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('api/1.0/balls/', views.BallsAPIViews.as_view()),
@@ -22,5 +23,7 @@ urlpatterns = [
     path('category/accessories', views.AccessoriesView.as_view()),
     path('accessory/<slug:slug>', views.AccessoryView.as_view()),
     path('training', views.BowlingSchoolView.as_view()),
+    path('sitemap', TemplateView.as_view(template_name='sitemap.txt')),
+    path('robot', TemplateView.as_view(template_name='robot.txt')),
     url(r'^', views.index),
 ]
