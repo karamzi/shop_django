@@ -106,7 +106,7 @@ def create_order(request):
             product.price = item['price']
             product.order = order
             product.save()
-        send_mail('Новый заказ', 'На сайте появился новый заказ', 'federation.bratsk@gmail.com', ['play-wow@yandex.ru'],
+        send_mail('Новый заказ', 'На сайте появился новый заказ', 'federation.bratsk@gmail.com', ['aleka-spb@mail.ru'],
                   fail_silently=False)
         return HttpResponse(status=200)
 
